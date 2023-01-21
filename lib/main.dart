@@ -1,69 +1,351 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_carousel_slider/carousel_slider.dart';
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+
+class ControlSlider extends StatefulWidget {
+  const ControlSlider({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<ControlSlider> createState() => _ControlSliderState();
 }
 
-class _MyAppState extends State<MyApp> {
+
+class _ControlSliderState extends State<ControlSlider> {
+  double valueSlider = 1;
+    int? val;
+  bool sa = false;
+  int scale = 0;
+  int saa = 0;
+  bool vala = false;
+  bool dal = false;
+  bool cal = false;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('image/phone.png'),
-              fit: BoxFit.cover),),
-          child: Center(
-            child: CarouselSlider(
-            slideTransform: CubeTransform(),
-             unlimitedMode: true,
-             enableAutoSlider: true,
-             autoSliderTransitionTime: const Duration(seconds: 2),
-              children: [
-              Container(color: Colors.red,child: Column(
-                children: [
-                  
-           Padding(
-             padding: const EdgeInsets.only(top: 20),
-             child: Container(
-                height: 40,
-                width: 160,
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(50)),)
+    return Scaffold(
+      body: Container(
+        child: Column(
+          children: [Padding(
+            padding: const EdgeInsets.only(top: 150),
+            child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                          child: RadioListTile(
+                              value: 1,
+                              title: Text('Small'),
+                              groupValue: val,
+                              onChanged: (v) {
+                                saa++;
+                                setState(
+                                  () {
+                                    if (val == 3) scale -=30;
+                                    if (val ==2)scale -=20;
+                                    scale += 10;
+                                    val = 1;
+                                  },
+                                );
+                              })),
+                      Expanded(
+                          child: RadioListTile(
+                              value: 2,
+                              title: Text(
+                                'Medium',
+                                style: TextStyle(fontSize: 13),
+                              ),
+                              groupValue: val,
+                              onChanged: (v) {
+                                saa++;
+                                setState(
+                                  () { 
+                                     if (val == 3) scale -=30;
+if (val ==1)scale -=10;
+                                    scale += 20;
+                                    val = 2;
+                                  },
+                                );
+                              })),
+                      Expanded(
+                        child: RadioListTile(
+                            value: 3,
+                            title: Text('Large'),
+                            groupValue: val,
+                            onChanged: (v) {
+                              saa++;
+                              setState(
+                                () {
+                                  if (val == 2) scale -=20;
+if (val ==1)scale -=10;
+                                  scale += 30;
+                                  val = 3;
+                                },
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
+          ), Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: CheckboxListTile(
+                        value: vala,
+                        onChanged: (value) {
+                          setState(() {
+                            vala = !vala;
+                            if (vala) {
+                              scale += 65;
+                            } else
+                              scale -= 65;
+                          });
+                        },
+                        activeColor: Colors.blue,
+                      ),
+                    ),Text('Extra Cheese'),
+                    Expanded(
+                      child: CheckboxListTile(
+                        value: cal,
+                        onChanged: (value) {
+
+setState(() {
+                            cal = !cal;
+                            if (cal) {
+                              scale += 65;
+                            } else
+                              scale -= 65;
+                          });
+                        },
+                        activeColor: Colors.blue,
+                      ),
+                    ),Text('Onions'),
+                    Expanded(
+                      child: CheckboxListTile(
+                        value: dal,
+                        onChanged: (value) {
+                          setState(() {
+                            dal = !dal;
+                            if (dal) {
+                              scale += 65;
+                            } else
+                              scale -= 65;
+                          });
+                        },
+                        activeColor: Colors.blue,
+                        
+                      ),
+                    ),Text('Chicken')
+                  ],
+                ),
               ),
-           ),
+            Center(
+              child: Column(
+                children: [
+                  Slider(
+                    mouseCursor:MouseCursor.defer,
+                    thumbColor: Colors.black,
+                    activeColor:Colors.red ,
+                    inactiveColor: Colors.pink,
+                    focusNode:FocusNode(debugLabel: 'Shirinboyev'),
+                    max: 100,
+                    min:1,
+                    divisions: 100,
+                    label: valueSlider.round().toString(),
+                    
+                    value: valueSlider,
+                    onChanged: (value) {
+                      setState(
+                      
+                        () {  
+                              if (cal) {
+                                  scale += scale;
+                                } else
+                                  scale -= scale ;
+                                        
+                          valueSlider = value;
+                        },
+                      );
+                    },
+                  ),
                 ],
-              ),),
-              
-              Image.asset('image/1.png'),
-              Image.asset('image/2.png'),
-              Image.asset('image/3.png'),
-              Image.asset('image/4.png'),
-              Image.asset('image/5.png'),
-              Image.asset('image/6.png'),
-              Image.asset('image/7.png'),
-              Image.asset('image/8.png'),
-              Image.asset('image/9.png'),
-              Image.asset('image/10.png'),
-              Image.asset('image/11.png'),
-              Image.asset('image/12.png'),
-              Image.asset('image/13.png'),
-              Image.asset('image/14.png'),
-           
-            ]),
-          ),
+              ),
+            ), Padding(
+                padding: const EdgeInsets.symmetric(vertical: 80),
+                child: Text(
+                  'Total sum.$scale',
+                  style: TextStyle(fontSize: 30),
+                ),
+              ),
+          ],
         ),
       ),
     );
   }
 }
 void main(){
-  runApp(MyApp());
+  runApp(MaterialApp(home: ControlSlider(),));
 }
+
+
+
+
+
+
+
+
+// class MyApp extends StatefulWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   State<MyApp> createState() => _MyAppState();
+// }
+
+// class _MyAppState extends State<MyApp> {
+//   int? val;
+//   bool sa = false;
+//   double scale = 0;
+//   int saa = 0;
+//   bool vala = false;
+//   bool dal = false;
+//   bool cal = false;
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(debugShowCheckedModeBanner: false,
+//       home: Scaffold(
+//         body: Container(
+//    width: double.infinity,
+//         height: double.infinity,
+//         decoration: BoxDecoration(
+//             image: DecorationImage(image: AssetImage('images/s.png'))),
+//           child: Column(
+//             children: [
+//               Center(
+//                 child: Image.asset('images/1.png'),
+//               ),
+//               Expanded(
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                   children: [
+//                     Expanded(
+//                         child: RadioListTile(
+//                             value: 1,
+//                             title: Text('Small'),
+//                             groupValue: val,
+//                             onChanged: (v) {
+//                               saa++;
+//                               setState(
+//                                 () {
+//                                   if (val == 3) scale -=30;
+//                                   if (val ==2)scale -=20;
+//                                   scale += 10;
+//                                   val = 1;
+//                                 },
+//                               );
+//                             })),
+//                     Expanded(
+//                         child: RadioListTile(
+//                             value: 2,
+//                             title: Text(
+//                               'Medium',
+//                               style: TextStyle(fontSize: 13),
+//                             ),
+//                             groupValue: val,
+//                             onChanged: (v) {
+//                               saa++;
+//                               setState(
+//                                 () { 
+//                                    if (val == 3) scale -=30;
+// if (val ==1)scale -=10;
+//                                   scale += 20;
+//                                   val = 2;
+//                                 },
+//                               );
+//                             })),
+//                     Expanded(
+//                       child: RadioListTile(
+//                           value: 3,
+//                           title: Text('Large'),
+//                           groupValue: val,
+//                           onChanged: (v) {
+//                             saa++;
+//                             setState(
+//                               () {
+//                                 if (val == 2) scale -=20;
+// if (val ==1)scale -=10;
+//                                 scale += 30;
+//                                 val = 3;
+//                               },
+//                             );
+//                           }),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//               Expanded(
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                   children: [
+//                     Expanded(
+//                       child: CheckboxListTile(
+//                         value: vala,
+//                         onChanged: (value) {
+//                           setState(() {
+//                             vala = !vala;
+//                             if (vala) {
+//                               scale += 65;
+//                             } else
+//                               scale -= 65;
+//                           });
+//                         },
+//                         activeColor: Colors.blue,
+//                       ),
+//                     ),Text('Extra Cheese'),
+//                     Expanded(
+//                       child: CheckboxListTile(
+//                         value: cal,
+//                         onChanged: (value) {
+
+// setState(() {
+//                             cal = !cal;
+//                             if (cal) {
+//                               scale += 65;
+//                             } else
+//                               scale -= 65;
+//                           });
+//                         },
+//                         activeColor: Colors.blue,
+//                       ),
+//                     ),Text('Onions'),
+//                     Expanded(
+//                       child: CheckboxListTile(
+//                         value: dal,
+//                         onChanged: (value) {
+//                           setState(() {
+//                             dal = !dal;
+//                             if (dal) {
+//                               scale += 65;
+//                             } else
+//                               scale -= 65;
+//                           });
+//                         },
+//                         activeColor: Colors.blue,
+                        
+//                       ),
+//                     ),Text('Chicken')
+//                   ],
+//                 ),
+//               ),
+//               Padding(
+//                 padding: const EdgeInsets.symmetric(vertical: 80),
+//                 child: Text(
+//                   'Total sum.$scale',
+//                   style: TextStyle(fontSize: 30),
+//                 ),
+//               ),Icon(Icons.favorite_sharp, color: Colors.red,),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
