@@ -143,10 +143,10 @@ setState(() {
                 children: [
                   Slider(
                     mouseCursor:MouseCursor.defer,
-                    thumbColor: Colors.black,
+                    thumbColor: Colors.white,
                     activeColor:Colors.red ,
-                    inactiveColor: Colors.pink,
-                    focusNode:FocusNode(debugLabel: 'Shirinboyev'),
+                    inactiveColor: Colors.purple,
+                    focusNode:FocusNode(descendantsAreTraversable: false),
                     max: 100,
                     min:1,
                     divisions: 100,
@@ -185,11 +185,6 @@ setState(() {
 void main(){
   runApp(MaterialApp(home: ControlSlider(),));
 }
-
-
-
-
-
 
 
 
