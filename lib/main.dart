@@ -53,44 +53,49 @@ class _MyWidgetState extends State<MyWidget> {
         title: Text('Shirinboyev'),
         ),
         body: 
-           Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(
-                height: 100,
-                child: SingleChildScrollView(
-                  child: Container(
-                    height: 100,
-                    margin: EdgeInsets.all(30),
-                    child: TextField(
-                      keyboardType: TextInputType.streetAddress,
-                      keyboardAppearance:Brightness.dark , 
-                      controller: controller,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        suffixIcon: IconButton(
-                          onPressed: (){
-                            int a =s;
-                            for (int i = 0; i < names.length; i++){
-                               if(names[i].toLowerCase()==controller.text.toLowerCase()){
-                                setState(() {
-                                s= i;
-                                });break;
-                               }else{setState(() {
-                                 s = names.length;
-                               });}      
-                            };
-                          }, 
-                        icon: Icon(Icons.search_rounded))
+           Container(
+            color: Colors.white,
+             child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  
+                  height: 100,
+                  child: SingleChildScrollView(
+                    child: Container(
+                      color: Colors.white,
+                      height: 100,
+                      margin: EdgeInsets.all(30),
+                      child: TextField(
+                        keyboardType: TextInputType.streetAddress,
+                        keyboardAppearance:Brightness.dark , 
+                        controller: controller,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          suffixIcon: IconButton(
+                            onPressed: (){
+                              int a =s;
+                              for (int i = 0; i < names.length; i++){
+                                 if(names[i].toLowerCase()==controller.text.toLowerCase()){
+                                  setState(() {
+                                  s= i;
+                                  });break;
+                                 }else{setState(() {
+                                   s = names.length;
+                                 });}      
+                              };
+                            }, 
+                          icon: Icon(Icons.search_rounded))
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),Container(
-                height: 220,
-                child: Image.asset(pictures[s]), 
-                ),if(s ==names)Center(child: Image.asset('image/not.png'),)
-              ],
-            ),
+                ),Container(
+                  height: 220,
+                  child: Image.asset(pictures[s]), 
+                  ),if(s ==names)Center(child: Image.asset('image/not.png'),)
+                ],
+              ),
+           ),
             
         ),
         );
