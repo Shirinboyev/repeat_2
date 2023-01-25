@@ -41,9 +41,8 @@ class _MyWidgetState extends State<MyWidget> {
         'image/orange.png',
         'image/mango.png',
         'image/pinapple.png',
+        'image/not.png'
         ];
-      //  return names.indexOf(txt.toLowerCase());
-// }
         String find = 'topilmadi';
         int s = 0;
   String  result = '';
@@ -73,15 +72,13 @@ class _MyWidgetState extends State<MyWidget> {
                             int a =s;
                             for (int i = 0; i < names.length; i++){
                                if(names[i].toLowerCase()==controller.text.toLowerCase()){
+                                setState(() {
                                 s= i;
-                                a++;
-                               }
-                               else result = 'toplimadi';
-                            
-                
-                            }                        
-                                                 setState(() {
-                            });
+                                });break;
+                               }else{setState(() {
+                                 s = names.length;
+                               });}      
+                            };
                           }, 
                         icon: Icon(Icons.search_rounded))
                       ),
@@ -91,7 +88,7 @@ class _MyWidgetState extends State<MyWidget> {
               ),Container(
                 height: 220,
                 child: Image.asset(pictures[s]), 
-                ),
+                ),if(s ==names)Center(child: Image.asset('image/not.png'),)
               ],
             ),
             
